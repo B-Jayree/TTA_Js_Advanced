@@ -15,6 +15,13 @@ const displayTasks = () => {
      const taskLinks = document.createElement('div');
      taskLinks.classList.add('task-links');
 
+     const updateButton = document.createElement('a');
+     updateButton.href = '#';
+     updateButton.textContent = 'update';
+     updateButton.classList.add('text-blue-500' , 'mr-4');
+     updateButton.addEventListener('click', () => editTask(index));
+     taskLinks.appendChild(updateButton);
+
      const deleteButton = document.createElement('a');
      deleteButton.href = '#';
      deleteButton.textContent = 'Delete';
@@ -49,10 +56,25 @@ const addTask = () => {
     }
 }
 
+
+const editTask = (index) => {
+    const updatedTask = prompt("Update your task", tasks[index]);
+    if(updatedTask && updatedTask.trim() !== ""){
+        tasks[index] = updatedTask;
+        displayTasks();
+    }
+    else{
+
+    }
+}
+
+
+
+
 const deleteTask = (index) => {
   if(confirm('Are you sure you want to delete this task?')){
 tasks.splice(index, 1);
-// saveTaskToLocalStorage();
+saveTaskToLocalStorage();
 displayTasks();  
 } 
 }
